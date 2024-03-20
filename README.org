@@ -1,0 +1,7 @@
+This is a backup for my Emacs config. It's reproducible from its Guix environment:
+
+#+begin_src bash
+  $ guix shell -m manifest.scm -- emacs
+#+end_src
+
+The channel and commit are provided in ~channels.scm~ in case the manifest alone is not sufficient.
