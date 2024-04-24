@@ -11,13 +11,6 @@
   (fset 'org-copy-url
         (kmacro-lambda-form [?\C-c ?\C-l ?\C-  ?\C-a ?\M-w ?\C-x ?\C-0] 0 "%d"))
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-  (setq org-babel-default-header-args '((:results . "output")))
-  (setq org-agenda-start-on-weekday 0)
-  (setq org-startup-indented t
-	org-pretty-entities t
-	org-hide-emphasis-markers t
-	org-startup-with-inline-images t
-	org-image-actual-width '(300))
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((awk . t)
@@ -26,6 +19,13 @@
      (python . t)
      (shell . t)))
   :custom
+  (org-babel-default-header-args '((:results . "output")))
+  (org-agenda-start-on-weekday 0)
+  (org-startup-indented t)
+  (org-pretty-entities t)
+  (org-hide-emphasis-markers t)
+  (org-startup-with-inline-images t)
+  (org-image-actual-width '(300))
   (org-file-apps
    '((auto-mode . emacs)
      ("\\.x?html?\\'" . "xdg-open %s")))
