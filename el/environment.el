@@ -37,7 +37,10 @@
   (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
 
   ;; Enable recursive minibuffers
-  (setq enable-recursive-minibuffers t))
+  (setq enable-recursive-minibuffers t)
+
+  ;; Enable auto revert for every file
+  (global-auto-revert-mode))
 
 (use-package orderless
   :custom
