@@ -4,6 +4,9 @@
          ("C-c c" . org-capture))
   :hook ((org-mode . visual-line-mode)
          (org-mode . org-indent-mode)
+	 (org-mode . org-super-agenda-mode)
+	 (org-mode . org-modern-mode)
+	 (org-mode . org-modern-agenda)
          (org-mode . (lambda ()
                        (local-set-key (kbd "C-c u") #'org-copy-url))))
   :config
@@ -11,6 +14,9 @@
   (fset 'org-copy-url
         (kmacro-lambda-form [?\C-c ?\C-l ?\C-  ?\C-a ?\M-w ?\C-x ?\C-0] 0 "%d"))
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
+  (let ((org-super-agenda-groups
+	 '((:auto-group t)))))
+
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((awk . t)
@@ -19,8 +25,31 @@
      (python . t)
      (shell . t)))
   :custom
-  (org-babel-default-header-args '((:results . "output")))
+  ;; Agenda customization
   (org-agenda-start-on-weekday 0)
+  (org-agenda-span 30)
+  (org-agenda-files '("~/Documentos/Anotações/agenda.org"
+                      "~/Documentos/Anotações/todo.org"))
+  (org-agenda-skip-scheduled-if-done t)
+  (org-agenda-skip-deadline-if-done t)
+  (org-agenda-include-deadlines t)
+  (org-agenda-include-diary t)
+  (org-agenda-block-separator nil)
+  (org-agenda-compact-blocks t)
+  (org-agenda-start-with-log-mode t)
+
+  ;; Tag colors
+  (org-tag-faces
+   '(("INPE"       . (:foreground "mediumPurple1" :weight bold))
+     ("UFSM"       . (:foreground "royalblue1"    :weight bold))
+     ("Web"        . (:foreground "forest green"  :weight bold))
+     ("Science"    . (:foreground "sienna"        :weight bold))
+     ("Meeting"    . (:foreground "goldenrod4"    :weight bold))))
+
+  ;; Babel customization
+  (org-babel-default-header-args '((:results . "output")))
+
+  ;; Other customization
   (org-startup-indented t)
   (org-pretty-entities t)
   (org-hide-emphasis-markers t)
@@ -30,8 +59,6 @@
    '((auto-mode . emacs)
      ("\\.x?html?\\'" . "xdg-open %s")))
   (org-directory "~/Documentos/Anotações/org")
-  (org-agenda-files '("~/Documentos/Anotações/agenda.org"
-                      "~/Documentos/Anotações/todo.org"))
   (org-log-done 'time)
   (org-todo-keywords
    '((sequence "TODO" "STARTED" "WAITING" "DELEGATED" "|" "DONE" "DEFERRED"))))

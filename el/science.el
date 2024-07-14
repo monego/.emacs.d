@@ -7,6 +7,7 @@
    (org-mode . citar-capf-setup))
   :config
   (advice-add #'completing-read-multiple :override #'consult-completing-read-multiple)
+  (add-to-list 'citar-file-open-functions '("pdf" . citar-file-open-external))
   :custom
   (citar-bibliography '("~/Documentos/INPE/referencias.bib"))
   (citar-library-paths '("~/Documentos/INPE/Artigos"))

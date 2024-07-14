@@ -41,5 +41,6 @@ See URL `http://pypi.python.org/pypi/ruff'."
   (add-hook 'before-save-hook 'eglot-format-buffer t t))
 
 (add-hook 'python-mode-hook 'my-python-setup)
-(add-hook 'python-mode-hook 'blacken-mode)
 (add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)                 ; optional

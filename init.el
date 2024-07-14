@@ -1,5 +1,6 @@
 (dolist (file '("~/.emacs.d/el/environment.el"
 		"~/.emacs.d/el/git.el"
+		"~/.emacs.d/el/guix.el"
 		"~/.emacs.d/el/lisp.el"
 		"~/.emacs.d/el/org.el"
 		"~/.emacs.d/el/python.el"
@@ -9,9 +10,22 @@
 
 (load-theme 'ef-maris-dark t)
 
+(add-to-list 'auto-mode-alist '("ledger.dat" . ledger-mode))
+
+;; For `eat-eshell-mode'.
+(add-hook 'eshell-load-hook #'eat-eshell-mode)
+
+;; For `eat-eshell-visual-command-mode'.
+(add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
+
 ;; Export this variable in .bashrc. It's the authentication token to publish
 ;; to WriteFreely using writefreely.el.qq
-(setq writefreely-auth-token (getenv "WRITEFREELY_AUTH_TOKEN"))
+
+(use-package writefreely
+  :after org
+  :config
+  (setq writefreely-instance-api-endpoint "https://paper.wf/api")
+  (setq writefreely-auth-token (getenv "WRITEFREELY_AUTH_TOKEN")))
 
 (setq inhibit-start-message t)
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
@@ -122,4 +136,4 @@
 (meow-setup)
 (meow-global-mode 1)
 
-(set-frame-font "JetBrainsMono Nerd Font 12" nil t)
+(set-frame-font "Fira Code Medium 12" nil t)

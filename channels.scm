@@ -4,16 +4,19 @@
 
 (list
      ;; Nota: estes outros commits também foram usados para instalar alguns dos pacotes neste perfil:
-     ;;   "b386c11e7804e0b577411d930b60f1e0a4a0382c"
-     ;;   "570ef13a87bb54d3410c431700ba78316a2641e2"
-     ;;   "2823253484e49391c6ba3c653a2f9e9f5e5f38ae"
-     ;;   "dae418afd70155b59ee4740edb044c35b7b52536"
+     ;;   "bab73e413b3421f4aa051e9438d147040a52e1be"
+     ;;   "0eb3546d5a988d8d7ced886622a49b4c1ea1bede"
+     ;;   "612e4dd98f7d1d015e405af9d029bede3fe3c280"
+     ;;   "e66b8d0534acc55264470cf22fe0af111df52347"
+     ;;   "c81ed0970007810a4662edbc3474f5afc656fe95"
+     ;;   "a1d711c92e119f6b5b8e99a620cdba92a4ca3bfb"
+     ;;   "0485e3a4a6b33c5efe5367a04ba86f3563afd1e8"
      (channel
        (name 'guix)
        (url "https://git.savannah.gnu.org/git/guix.git")
        (branch "master")
        (commit
-         "c8556379c3f2d3d095a178858915720f2eebc012")
+         "e13f7d48e5b989f5dbd27c19ac81989ec6b3ec6e")
        (introduction
          (make-channel-introduction
            "9edb3f66fd807b096b48283debdcddccfea34bad"
@@ -24,7 +27,7 @@
        (url "https://gitlab.com/nonguix/nonguix")
        (branch "master")
        (commit
-         "5baccd1d72594b4c85e958c2f34cac923345acb3")
+         "831f3ff14260e20d4da31b707515891eeb49e752")
        (introduction
          (make-channel-introduction
            "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
