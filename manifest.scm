@@ -5,7 +5,14 @@
 ;; retornado por "guix describe".  Veja a seção "Replicating Guix" no manual.
 
 (specifications->manifest
-  (list "emacs-doom-modeline"
+  (list "emacs-which-key"
+        "emacs-lsp-ui"
+        "emacs-lsp-mode"
+        "emacs-jsonrpc"
+        "python-lsp-server"
+        "emacs-eglot"
+        "emacs-org-caldav"
+        "emacs-doom-modeline"
         "emacs-consult-org-roam"
         "emacs-citar-org-roam"
         "emacs-org-roam"

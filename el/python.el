@@ -1,46 +1,22 @@
-;; Flycheck is "more modern" than Flymake
-;; Ruff should be used for flycheck
-;; Elpy should not be used with eglot
+;; Eglot is currently broken in Emacs 29.3 from Guix.  See
+;; https://issues.guix.gnu.org/70211
+;; Use lsp-mode for now.
 
-(require 'flycheck)
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (python-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
 
-(flycheck-define-checker python-ruff
-  "A Python syntax and style checker using the ruff utility.
-To override the path to the ruff executable, set
-`flycheck-python-ruff-executable'.
-See URL `http://pypi.python.org/pypi/ruff'."
-  :command ("ruff"
-            "--output-format=text"
-            (eval (when buffer-file-name
-                    (concat "--stdin-filename=" buffer-file-name)))
-            "-")
-  :standard-input t
-  :error-filter (lambda (errors)
-                  (let ((errors (flycheck-sanitize-errors errors)))
-                    (seq-map #'flycheck-flake8-fix-error-level errors)))
-  :error-patterns
-  ((warning line-start
-            (file-name) ":" line ":" (optional column ":") " "
-            (id (one-or-more (any alpha)) (one-or-more digit)) " "
-            (message (one-or-more not-newline))
-            line-end))
-  :modes python-mode)
+;; optionally
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
-(add-to-list 'flycheck-checkers 'python-ruff)
-
-(defun my-python-setup ()
-  (when (executable-find "pyright-langserver")
-    (eglot-ensure)
-    (setq-local eglot-server-programs
-                `((python-mode . ("pyright-langserver" "--stdio"
-                                  "--typeCheckingMode" "strict"
-                                  "--logLevel" "off"
-                                  "--incremental"))))
-    (add-hook 'eglot-managed-mode #'flymake-ruff-load)
-    (setq-local eglot-stay-out-of '(company)))
-  (add-hook 'before-save-hook 'eglot-format-buffer t t))
-
-(add-hook 'python-mode-hook 'my-python-setup)
-(add-hook 'python-mode-hook 'flycheck-mode)
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)                 ; optional
+;; optional if you want which-key integration
+(use-package which-key
+    :config
+    (which-key-mode))

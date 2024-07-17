@@ -4,6 +4,9 @@
 
 (list
      ;; Nota: estes outros commits também foram usados para instalar alguns dos pacotes neste perfil:
+     ;;   "325fed4c1514bffd084355455710fcc3f1c8da2c"
+     ;;   "bcd627f58e74ce44cc96a9aac37c6d9e9e3c0dcc"
+     ;;   "e13f7d48e5b989f5dbd27c19ac81989ec6b3ec6e"
      ;;   "bab73e413b3421f4aa051e9438d147040a52e1be"
      ;;   "0eb3546d5a988d8d7ced886622a49b4c1ea1bede"
      ;;   "612e4dd98f7d1d015e405af9d029bede3fe3c280"
@@ -16,7 +19,7 @@
        (url "https://git.savannah.gnu.org/git/guix.git")
        (branch "master")
        (commit
-         "e13f7d48e5b989f5dbd27c19ac81989ec6b3ec6e")
+         "a800c49fb767f549fbc0eefe8dce6daa5da8604c")
        (introduction
          (make-channel-introduction
            "9edb3f66fd807b096b48283debdcddccfea34bad"
