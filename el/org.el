@@ -1,7 +1,8 @@
 (use-package org
   :bind (("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
-         ("C-c c" . org-capture))
+         ("C-c c" . org-capture)
+	 ("M-s s" . consult-org-heading))
   :hook ((org-mode . visual-line-mode)
          (org-mode . org-indent-mode)
 	 (org-mode . org-super-agenda-mode)
@@ -57,7 +58,9 @@
   (org-image-actual-width '(300))
   (org-file-apps
    '((auto-mode . emacs)
-     ("\\.x?html?\\'" . "xdg-open %s")))
+     ("\\.x?html?\\'" . "xdg-open %s")
+     ("\\.pdf\\'" . "xdg-open %s")
+     ("\\.mkv\\'" . "mpv %s")))
   (org-directory "~/Documentos/Anotações/org")
   (org-log-done 'time)
   (org-todo-keywords
