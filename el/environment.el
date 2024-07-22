@@ -16,7 +16,7 @@
 (use-package emacs
   :bind (("C-c e" . crux-find-user-init-file)
 	 ("C-c C-m" . crux-rename-file-and-buffer)
-	 ("C-c t" . crux-visit-shell-buffer)
+	 ("<f6>" . crux-visit-shell-buffer)
 	 ("M-o" . crux-other-window-or-switch-buffer))
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
