@@ -1,4 +1,51 @@
-(dirvish-override-dired-mode)
+(use-package all-the-icons)
+
+(use-package dirvish
+  :init
+  (dirvish-override-dired-mode)
+  :bind
+  (("C-c f" . dirvish-fd)
+   :map dirvish-mode-map
+   ("a"   . dirvish-quick-access)
+   ("f"   . dirvish-file-info-menu)
+   ("y"   . dirvish-yank-menu)
+   ("N"   . dirvish-narrow)
+   ("^"   . dired-up-directory)
+   ("h"   . dirvish-history-jump)	; remapped `describe-mode'
+   ("s"   . dirvish-quicksort)	; remapped `dired-sort-toggle-or-edit'
+   ("v"   . dirvish-vc-menu)	; remapped `dired-view-file'
+   ("TAB" . dirvish-subtree-toggle)
+   ("M-f" . dirvish-history-go-forward)
+   ("M-b" . dirvish-history-go-backward)
+   ("M-l" . dirvish-ls-switches-menu)
+   ("M-m" . dirvish-mark-menu)
+   ("M-t" . dirvish-layout-toggle)
+   ("M-s" . dirvish-setup-menu)
+   ("M-e" . dirvish-emerge-menu)
+   ("M-j" . dirvish-fd-jump))
+  :config
+  (dirvish-define-preview exa (file)
+  "Use `exa' to generate directory preview."
+  :require ("exa") ; tell Dirvish to check if we have the executable
+  (when (file-directory-p file) ; we only interest in directories here
+    `(shell . ("exa" "-al" "--color=always" "--icons"
+               "--group-directories-first" ,file))))
+
+  (add-to-list 'dirvish-preview-dispatchers 'exa)
+  (setq mouse-1-click-follows-link nil)
+  (define-key dirvish-mode-map (kbd "<mouse-1>") 'dirvish-subtree-toggle-or-open)
+  (define-key dirvish-mode-map (kbd "<mouse-2>") 'dired-mouse-find-file-other-window)
+  (define-key dirvish-mode-map (kbd "<mouse-3>") 'dired-mouse-find-file)
+  (setq dired-mouse-drag-files t)
+  (setq mouse-drag-and-drop-region-cross-program t)
+  (setq dirvish-attributes
+	'(vc-state subtree-state all-the-icons git-msg file-size))
+  :custom
+  (dirvish-quick-access-entries '(("h" "~/" "Home")
+				  ("d" "~/Documentos/INPE/Doutorado/" "Doutorado")
+				  ("e" "~/.emacs.d/" "Emacs user directory")
+				  ("n" "~/Documentos/Repos/nupedee/" "NUPEDEE")
+				  ("t" "~/Documentos/Concurso/TSE/" "Concurso TSE"))))
 
 ;; Enable vertico
 (use-package vertico
@@ -274,14 +321,6 @@
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
 
-
-(use-package dired
-  :commands (dired dired-jump)
-  :bind (("C-x C-j" . dired-jump))
-  :custom ((dired-listing-switches "-agho --group-directories-first")))
-
-(use-package all-the-icons-dired
-  :hook (dired-mode . all-the-icons-dired-mode))
 
 (use-package jinx
   :hook (emacs-startup . global-jinx-mode)
